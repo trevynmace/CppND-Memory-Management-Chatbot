@@ -45,6 +45,53 @@ ChatBot::~ChatBot()
 //// STUDENT CODE
 ////
 
+ChatBot::ChatBot(const ChatBot &copyBot)
+{
+    _chatLogic = copyBot._chatLogic;
+    _rootNode = copyBot._rootNode;
+    _image = copyBot._image;
+}
+
+ChatBot& ChatBot::operator=(const ChatBot &other)
+{
+    if (&other == this) return *this;
+
+    _chatLogic = other._chatLogic;
+    _rootNode = other._rootNode;
+    _image = other._image;
+
+    return *this;
+}
+
+ChatBot::ChatBot(ChatBot &&mover)
+{
+    _chatLogic = mover._chatLogic;
+    _rootNode = mover._rootNode;
+    _image = mover._image;
+
+    _chatLogic -> SetChatbotHandle(this);
+
+    mover._chatLogic = nullptr;
+    mover._rootNode = nullptr;
+    mover._image = nullptr;
+}
+
+ChatBot& ChatBot::operator=(ChatBot &&mover)
+{
+    if (&mover == this) return *this;
+    if (!_image) delete _image;
+
+    _chatLogic = mover._chatLogic;
+    _rootNode = mover._rootNode;
+    _image = mover._image;
+
+    _chatLogic -> SetChatbotHandle(this);
+
+    mover._chatLogic = nullptr;
+    mover._rootNode = nullptr;
+    mover._image = nullptr;
+}
+
 ////
 //// EOF STUDENT CODE
 
