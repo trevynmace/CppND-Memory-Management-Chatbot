@@ -94,6 +94,8 @@ ChatBot& ChatBot::operator=(ChatBot &&mover)
     mover._chatLogic = nullptr;
     mover._rootNode = nullptr;
     mover._image = nullptr;
+
+    return *this;
 }
 
 ////
